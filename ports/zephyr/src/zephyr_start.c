@@ -24,11 +24,17 @@
  * THE SOFTWARE.
  */
 #include <zephyr.h>
+#include <net/socket.h>
 #include "zephyr_getchar.h"
 
 int real_main(void);
 
 void main(void) {
     zephyr_getchar_init();
+
+#if defined(CONFIG_SOCKET_OFFLOAD)
+	socket_offload_init();
+#endif
+
     real_main();
 }
